@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.OktaDemo.XF">
+	<uses-sdk android:minSdkVersion="15" />
+	<application android:label="OktaDemo.XF.Android">
+	  <!-- Callback from authentication screen -->
+    <activity android:name="net.openid.appauth.RedirectUriReceiverActivity">
+      <!-- Filter which captures custom scheme based redirects for Okta authorization requests. -->
+      <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="com.oktapreview.dev-224943"/>
+      </intent-filter>
+    </activity>
+  </application>
+</manifest>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:OktaDemo.XF"
+             x:Class="OktaDemo.XF.Pages.MainPage"
+             Title="OktaDemo.XF">
+    <ContentPage.Content>
+        <Grid>
+            <Image
+                Source="Kdi4VVw5Ir5wkV.png"
+                Aspect="AspectFill"></Image>
+            <Button
+                Text="Log in"
+                TextColor="White"
+                BackgroundColor="Orange"
+                BorderWidth="0"
+                VerticalOptions="End"
+                Margin="30"
+                Clicked="OnLogInButtonClicked"/>
+            <ActivityIndicator
+                x:Name="_activityIndicator"
+                IsVisible="{Binding IsBusy}"
+                IsRunning="True"
+                IsEnabled="True"
+                Color="Orange"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
