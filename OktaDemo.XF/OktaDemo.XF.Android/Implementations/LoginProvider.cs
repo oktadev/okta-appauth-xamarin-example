@@ -67,10 +67,7 @@ namespace OktaDemo.XF.Droid.Implementations
             var postAuthorizationIntent = CreatePostAuthorizationIntent(MainActivity.Instance, authRequest,
                 serviceConfig.DiscoveryDoc, authState);
 
-            var customTabsIntentBuilder = _authService.CreateCustomTabsIntentBuilder();
-            var customTabsIntent = customTabsIntentBuilder.Build();
-
-            _authService.PerformAuthorizationRequest(authRequest, postAuthorizationIntent, customTabsIntent);
+            _authService.PerformAuthorizationRequest(authRequest, postAuthorizationIntent);
         }
 
 
