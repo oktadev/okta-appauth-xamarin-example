@@ -10,7 +10,6 @@ using OpenId.AppAuth;
 using UIKit;
 
 [assembly: Xamarin.Forms.Dependency(typeof(LoginProvider))]
-
 namespace OktaDemo.XF.iOS.Implementations
 {
     public class LoginProvider : IAuthStateChangeDelegate, IAuthStateErrorDelegate, ILoginProvider
@@ -19,33 +18,29 @@ namespace OktaDemo.XF.iOS.Implementations
         // serialize to disk.
         private AuthState _authState;
 
-        private readonly AsyncAutoResetEvent _loginResultWaitHandle = new AsyncAutoResetEvent(false);
+        private readonly AsyncAutoResetEvent _loginResultWaitHandle
+            = new AsyncAutoResetEvent(false);
 
-        // Authorization code flow using OIDAuthState automatic code exchanges.
         public async Task<AuthInfo> LoginAsync()
         {
-            //var issuer = new NSUrl(Constants.Issuer);
             var redirectUri = new NSUrl(Constants.RedirectUri);
-
-            //Console.WriteLine($"Fetching configuration for issuer: {issuer}");
 
             try
             {
                 // discovers endpoints
-                var configuration =
-                    await AuthorizationService.DiscoverServiceConfigurationForDiscoveryAsync(
+                var configuration = await AuthorizationService
+                    .DiscoverServiceConfigurationForDiscoveryAsync(
                         new NSUrl(Constants.DiscoveryEndpoint));
 
                 Console.WriteLine($"Got configuration: {configuration}");
 
-                // builds authentication request
                 var request = new AuthorizationRequest(
-                    configuration, Constants.ClientId, Constants.Scopes, redirectUri, ResponseType.Code, null);
+                    configuration, Constants.ClientId,
+                    Constants.Scopes, redirectUri, ResponseType.Code, null);
                 
-                // performs authentication request
-                var appDelegate = (AppDelegate) UIApplication.SharedApplication.Delegate;
+                // Performs authentication request
                 Console.WriteLine($"Initiating authorization request with scope: {request.Scope}");
-
+                var appDelegate = (AppDelegate) UIApplication.SharedApplication.Delegate;
                 appDelegate.CurrentAuthorizationFlow = AuthState.PresentAuthorizationRequest(request,
                     UIKit.UIApplication.SharedApplication.KeyWindow.RootViewController, (authState, error) =>
                     {
@@ -60,6 +55,7 @@ namespace OktaDemo.XF.iOS.Implementations
                             Console.WriteLine($"Authorization error: {error.LocalizedDescription}");
                             _authState = null;
                         }
+
                         //We need this line to tell the Login method to return the result
                         _loginResultWaitHandle.Set();
                     });

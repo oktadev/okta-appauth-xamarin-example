@@ -1,6 +1,6 @@
-# Xamarin.Forms authentication with OpenID Connect and Okta
+# Xamarin.Forms authentication with OpenID Connect + Okta
  
-This example app shows how to use Okta's Java SDK to store cryptocurrency holdings as a custom user attribute.
+These examples show how to build a Xamarin.Forms project (targeting iOS and Android) that uses Okta for easy login. Under the hood, OpenID Connect and the AppAuth pattern is used.
 
 Please read [the blog post][blog-post] to see how this app was created.
 
@@ -28,9 +28,7 @@ Open `OktaDemo.SF.sln` in Visual Studio and compile the project.
 
 You will need to create an application in Okta to perform authentication. 
 
-Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Native**, click **Next**, and give the application a name you’ll remember.
-
-The default settings are fine. Click **Done** to create the application.
+Log in to your Okta Developer account (or [sign up](https://developer.okta.com/signup/) if you don’t have an account) and navigate to **Applications** > **Add Application**. Click **Native**, click **Next**, and give the application a name you’ll remember. The default settings are fine! Click **Done** to create the application.
 
 Scroll to the bottom of the General tab to find the client ID. You'll need this value in the next step.
 

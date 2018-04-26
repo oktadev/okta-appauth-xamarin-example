@@ -32,8 +32,9 @@ namespace OktaDemo.XF.iOS
             return base.FinishedLaunching(app, options);
         }
 
-        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication,
-            NSObject annotation)
+        public override bool OpenUrl(
+            UIApplication application, NSUrl url,
+            string sourceApplication, NSObject annotation)
         {
             // Sends the URL to the current authorization flow (if any) which will process it if it relates to
             // an authorization response.

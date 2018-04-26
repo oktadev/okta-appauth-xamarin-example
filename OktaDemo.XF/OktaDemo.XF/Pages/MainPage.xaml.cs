@@ -32,6 +32,7 @@ namespace OktaDemo.XF.Pages
             IsBusy = true;
             var authInfo = await loginProvider.LoginAsync();
             IsBusy = false;
+            
             if (string.IsNullOrWhiteSpace(authInfo.AccessToken) || !authInfo.IsAuthorized)
             {
                 Device.BeginInvokeOnMainThread(async () =>
@@ -45,10 +46,12 @@ namespace OktaDemo.XF.Pages
 
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(authInfo.IdToken);
-                var name = jsonToken?.Payload?.Claims?.FirstOrDefault(x => x.Type == "name")?.Value;
-                var email = jsonToken?.Payload?.Claims?.FirstOrDefault(x => x.Type == "email")?.Value;
-                var preferredUsername = jsonToken?.Payload?.Claims
-                    ?.FirstOrDefault(x => x.Type == "preferred_username")?.Value;
+                var claims = jsonToken?.Payload?.Claims;
+
+                var name = claims?.FirstOrDefault(x => x.Type == "name")?.Value;
+                var email = claims?.FirstOrDefault(x => x.Type == "email")?.Value;
+                var preferredUsername = claims?
+                    .FirstOrDefault(x => x.Type == "preferred_username")?.Value;
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {

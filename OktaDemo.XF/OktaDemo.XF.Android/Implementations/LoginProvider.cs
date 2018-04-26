@@ -38,7 +38,6 @@ namespace OktaDemo.XF.Droid.Implementations
                 MakeAuthRequest(serviceConfiguration, new AuthState());
 
                 await _loginResultWaitHandle.WaitAsync();
-
             }
             catch (AuthorizationException ex)
             {
@@ -55,30 +54,40 @@ namespace OktaDemo.XF.Droid.Implementations
             };
         }
 
-        private void MakeAuthRequest(AuthorizationServiceConfiguration serviceConfig, AuthState authState)
+        private void MakeAuthRequest(
+            AuthorizationServiceConfiguration serviceConfig,
+            AuthState authState)
         {
             var authRequest = new AuthorizationRequest.Builder(
-                    serviceConfig, Constants.ClientId, ResponseTypeValues.Code, Android.Net.Uri.Parse(Constants.RedirectUri))
+                    serviceConfig, Constants.ClientId,
+                    ResponseTypeValues.Code,
+                    Android.Net.Uri.Parse(Constants.RedirectUri))
                 .SetScope(string.Join(" ", Constants.Scopes))
                 .Build();
 
             Console.WriteLine("Making auth request to " + serviceConfig.AuthorizationEndpoint);
 
-            var postAuthorizationIntent = CreatePostAuthorizationIntent(MainActivity.Instance, authRequest,
-                serviceConfig.DiscoveryDoc, authState);
+            var postAuthorizationIntent = CreatePostAuthorizationIntent(
+                MainActivity.Instance, authRequest, serviceConfig.DiscoveryDoc, authState);
 
             _authService.PerformAuthorizationRequest(authRequest, postAuthorizationIntent);
         }
 
 
-        private PendingIntent CreatePostAuthorizationIntent(Context context, AuthorizationRequest request,
-            AuthorizationServiceDiscovery discoveryDoc, AuthState authState)
+        private PendingIntent CreatePostAuthorizationIntent(
+            Context context,
+            AuthorizationRequest request,
+            AuthorizationServiceDiscovery discoveryDoc,
+            AuthState authState)
         {
             var intent = new Intent(context, typeof(MainActivity));
             intent.PutExtra(Constants.AuthStateKey, authState.JsonSerializeString());
+
             if (discoveryDoc != null)
             {
-                intent.PutExtra(Constants.AuthServiceDiscoveryKey, discoveryDoc.DocJson.ToString());
+                intent.PutExtra(
+                    Constants.AuthServiceDiscoveryKey,
+                    discoveryDoc.DocJson.ToString());
             }
 
             return PendingIntent.GetActivity(context, request.GetHashCode(), intent, 0);
