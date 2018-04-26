@@ -41,7 +41,7 @@ namespace OktaDemo.XF.Pages
             }
             else
             {
-                //TODO: Save at least the access token somewhere
+                //TODO: Save the access and refresh tokens somewhere secure
 
                 var handler = new JwtSecurityTokenHandler();
                 var jsonToken = handler.ReadJwtToken(authInfo.IdToken);
@@ -49,6 +49,7 @@ namespace OktaDemo.XF.Pages
                 var email = jsonToken?.Payload?.Claims?.FirstOrDefault(x => x.Type == "email")?.Value;
                 var preferredUsername = jsonToken?.Payload?.Claims
                     ?.FirstOrDefault(x => x.Type == "preferred_username")?.Value;
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     await Navigation.PushAsync(new AuthInfoPage(name, email, preferredUsername));

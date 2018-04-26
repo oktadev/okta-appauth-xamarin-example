@@ -57,9 +57,9 @@ namespace OktaDemo.XF.Droid.Implementations
 
         private void MakeAuthRequest(AuthorizationServiceConfiguration serviceConfig, AuthState authState)
         {
-            var authRequest = new AuthorizationRequest.Builder(serviceConfig, Constants.ClientId,
-                    ResponseTypeValues.Code, Android.Net.Uri.Parse(Constants.RedirectUri))
-                .SetScope("openid profile email offline_access")
+            var authRequest = new AuthorizationRequest.Builder(
+                    serviceConfig, Constants.ClientId, ResponseTypeValues.Code, Android.Net.Uri.Parse(Constants.RedirectUri))
+                .SetScope(string.Join(" ", Constants.Scopes))
                 .Build();
 
             Console.WriteLine("Making auth request to " + serviceConfig.AuthorizationEndpoint);
@@ -145,7 +145,7 @@ namespace OktaDemo.XF.Droid.Implementations
                     _loginResultWaitHandle.Set();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //We need this line to tell the Login method to return the result
                 _loginResultWaitHandle.Set();

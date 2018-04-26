@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OktaDemo.XF.Helpers
+﻿namespace OktaDemo.XF.Helpers
 {
     public class Constants
     {
-        public const string ClientId = "0oadh6kmymhwJIHwl0h7";
-        public const string RedirectUri = "com.oktapreview.dev-224943:/callback";
-        public const string DiscoveryEndpoint = "https://dev-224943.oktapreview.com/oauth2/default/.well-known/openid-configuration";
         public const string AuthStateKey = "authState";
         public const string AuthServiceDiscoveryKey = "authServiceDiscovery";
+
+        public const string ClientId = "{clientId}";
+        public const string RedirectUri = "{redirectUri}";
+        public const string OrgUrl = "https://{yourOktaDomain}.com";
+        public const string AuthorizationServerId = "default";
+
+        public static readonly string DiscoveryEndpoint =
+            $"{OrgUrl}/oauth2/{AuthorizationServerId}/.well-known/openid-configuration";
+
+
+        public static readonly string[] Scopes = new string[] {
+            "openid", "profile", "email", "offline_access" };
     }
 }

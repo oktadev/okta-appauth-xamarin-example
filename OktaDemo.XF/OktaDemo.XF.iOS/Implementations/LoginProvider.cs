@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Foundation;
 using Nito.AsyncEx;
 using OktaDemo.XF.Helpers;
-using OktaDemo.XF.iOS.Implementations;
 using OktaDemo.XF.Interfaces;
+using OktaDemo.XF.iOS.Implementations;
 using OktaDemo.XF.Models;
 using OpenId.AppAuth;
 using UIKit;
@@ -45,8 +39,9 @@ namespace OktaDemo.XF.iOS.Implementations
                 Console.WriteLine($"Got configuration: {configuration}");
 
                 // builds authentication request
-                var request = new AuthorizationRequest(configuration, Constants.ClientId,
-                    new string[] {Scope.OpenId, Scope.Profile, "offline_access"}, redirectUri, ResponseType.Code, null);
+                var request = new AuthorizationRequest(
+                    configuration, Constants.ClientId, Constants.Scopes, redirectUri, ResponseType.Code, null);
+                
                 // performs authentication request
                 var appDelegate = (AppDelegate) UIApplication.SharedApplication.Delegate;
                 Console.WriteLine($"Initiating authorization request with scope: {request.Scope}");

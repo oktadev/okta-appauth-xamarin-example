@@ -9,7 +9,7 @@
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:scheme="com.oktapreview.dev-224943"/>
+        <data android:scheme="{reverseDomainName}"/>
       </intent-filter>
     </activity>
   </application>
