@@ -80,4 +80,4 @@ Please post any questions as comments on the [blog post][blog-post], or visit ou
 
 Apache 2.0, see [LICENSE](LICENSE).
 
-[blog-post]: TODO
+[blog-post]: (https://developer.okta.com/blog/2018/05/01/add-authentication-xamarin-openid-connect)
